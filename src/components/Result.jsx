@@ -1,20 +1,15 @@
 import { Row, Col, Card } from 'antd';
 import Colors from '../config/pallete';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import openingHoursLogo from '../assets/icons/opening-hours.svg';
 import airplaneLogo from '../assets/icons/airplane.svg';
 import forestLogo from '../assets/icons/forest.svg';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-
+import SavingResultFile from '../output/pdf/SavingResultFile';
+import ReactPDF from '@react-pdf/renderer';
 
 
 function Result() { 
-  
-  const downloadPdf = () => {
-      // navigate('/result/pdf', {});
-      console.log('Download is starting...');
-      return <PDFDownloadLink fileName='TablePointer - Saving Result Report' />
-    }
 
   const data = {
     outlet: {
@@ -122,7 +117,12 @@ function Result() {
           <p className='dark_blue_small mt-[10px]'>Figures represented in this report are an estimate and may differ from the actual savings generated.</p>
           <Row className='mt-10 justify-end'>
             <Link to={'/contact-details'}><button className='plain_btn_outline'>Back</button></Link>
-            <Link to={'/result/pdf'} target='_blank'><button className='primary_btn ml-2' onClick={downloadPdf}>Download Report</button></Link>
+            
+              <Link to={'/result/pdf'} target='_blank'>
+                {/* <PDFDownloadLink fileName='TablePointer - Energy Saving Projection' document={<SavingResultFile/>} > */}
+                  <button className='primary_btn ml-2'>Download Report</button>
+                {/* </PDFDownloadLink> */}
+              </Link>
           </Row>
         </div>
     </div>

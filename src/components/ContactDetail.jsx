@@ -4,11 +4,15 @@ import { useEffect, useState } from 'react';
 import { save } from '../redux/contactSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { Input, Select, Row, Col, InputNumber, Form } from 'antd';
+import Flag from 'react-world-flags';
+import Countries from '../constants/Countries';
+
 const { Option } = Select;
 
 function ContactDetails() {
     
     const contact = useSelector((state) => state.contact.value);
+    
     const outlet = useSelector((state) => state.outlet.value);
 
     const dispatch = useDispatch();
@@ -22,17 +26,9 @@ function ContactDetails() {
     const mobileValue = Form.useWatch('mobile_number', form);
     const companyValue = Form.useWatch('company_name', form);
     const salesValue = Form.useWatch('sales_contact', form);
-    
-    const countryList = [
-        { value: 'singapore', label: 'Singapore' },
-        { value: 'malaysia', label: 'Malaysia' },
-        { value: 'indonesia', label: 'Indonesia' }
-        ];
-    const countries = [
-        { label: 'Singapore', code: 'SG', value: '+65', flag: 'SG', text:'SG +65' },
-        { label: 'Indonesia', code: 'ID', value: '+62', flag: '🇮🇩', text:'ID +62' },
-        { label: 'United States', code: 'US', value: '+1', flag: '🇺🇸', text:'US +1' },
-    ];
+    const countryCode = Form.useWatch('country_code', form);
+
+    var countries = Countries;
 
     const salesPersons = [
         { value: 'matthieu_quantin', label: 'Matthieu Quentin' },
@@ -42,8 +38,18 @@ function ContactDetails() {
     ];
 
     const [mandCom, setManCom] = useState(false);
+    
+    const [countryCodeValue, setcountryCodeValue] = useState( contact.country_code ?? "+65");
 
     useEffect(() =>{
+        if(Object.keys(outlet).length == 0){
+            navigate('/');
+        }
+        if(countryCode == null && contact.country_code == null ){
+            console.log("first")
+            setcountryCodeValue('+65');
+        }
+        countries = Countries;
         return checkMandatory();
     },[]);
     
@@ -70,6 +76,10 @@ function ContactDetails() {
         } else {
             setManCom(false);
         }
+    }
+
+    const onChangeCountryCode = (value) => {
+        setcountryCodeValue(value);
     }
 
     return (
@@ -128,9 +138,18 @@ function ContactDetails() {
                     ]}>
                     <Input addonBefore={(
                         <Form.Item noStyle name='country_code'>
-                            <Select defaultValue={countries[0].value}>
+                            <Select defaultValue="+65" popupMatchSelectWidth={false} className='flex item-center' style={{ width: '100px',  }} onChange={onChangeCountryCode}>
                                 {countries.map((e) => (
-                                    <Option  value={e.value}>{e.text}</Option>
+                                    <Option key={e.no} value={e.value} style={{ width: '320px' }} >
+                                        <Row wrap={false} className='flex item-center'>
+                                            <Col style={{ width: "20px", padding: 0 }}>
+                                                <Flag code={ e.code } style={{ height: "22px", width: "18px", paddingTop:5, marginBottom: 0, paddingBottom: 0, paddingRight: 0 }} />
+                                            </Col>
+                                            <Col style={{ width: "auto", marginLeft: "5px" }}>
+                                            {(countryCodeValue != e.value) && (<span>{e.label}</span>)} {e.value}
+                                            </Col>
+                                        </Row>
+                                    </Option>
                                 ))}
                             </Select>
                         </Form.Item>

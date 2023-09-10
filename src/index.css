@@ -16,6 +16,19 @@ code {
     monospace;
 } */
 
+@font-face {
+  font-family: 'madetommy';
+  src: url('/src/assets/fonts/made_tommy/MADE\ TOMMY\ Regular_PERSONAL\ USE.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'madetommy';
+  src: url('/src/assets/fonts/made_tommy/MADE\ TOMMY\ Bold_PERSONAL\ USE.otf');
+  font-weight: bold;
+  font-style: bold;
+}
+
 
 .main {
   width: 100vw;
