@@ -140,13 +140,13 @@ function ContactDetails() {
                         <Form.Item noStyle name='country_code'>
                             <Select defaultValue="+65" popupMatchSelectWidth={false} className='flex item-center' style={{ width: '100px',  }} onChange={onChangeCountryCode}>
                                 {countries.map((e) => (
-                                    <Option key={e.no} value={e.value} style={{ width: '320px' }} >
+                                    <Option key={e.no} value={e.dial} style={{ width: '320px' }} >
                                         <Row wrap={false} className='flex item-center'>
                                             <Col style={{ width: "20px", padding: 0 }}>
                                                 <Flag code={ e.code } style={{ height: "22px", width: "18px", paddingTop:5, marginBottom: 0, paddingBottom: 0, paddingRight: 0 }} />
                                             </Col>
                                             <Col style={{ width: "auto", marginLeft: "5px" }}>
-                                            {(countryCodeValue != e.value) && (<span>{e.label}</span>)} {e.value}
+                                            {(countryCodeValue != e.dial) && (<span>{e.label}</span>)} {e.dial}
                                             </Col>
                                         </Row>
                                     </Option>

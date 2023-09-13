@@ -5,7 +5,9 @@ import { save } from '../redux/outletSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import TagRenderer from '../utils/TagRenderer';
 import { useState, useEffect } from 'react';
+import Countries from '../constants/Countries';
 const { TextArea } = Input;
+const { Option } = Select;
 
 function OutletInfo() {
 
@@ -17,11 +19,14 @@ function OutletInfo() {
     
     const [form] = Form.useForm();
 
-    const countryList = [
-        { value: 'singapore', label: 'Singapore' },
-        { value: 'malaysia', label: 'Malaysia' },
-        { value: 'indonesia', label: 'Indonesia' }
-    ];
+    // const countryList = [
+    //     { value: 'singapore', label: 'Singapore' },
+    //     { value: 'malaysia', label: 'Malaysia' },
+    //     { value: 'indonesia', label: 'Indonesia' }
+    // ];
+
+    const countryList = Countries;
+
     const restaurantTypes = [
         { value: 'food_court', label: 'Food Court/Coffee Shop' },
         { value: 'full_service', label: 'Full Service' },
@@ -59,6 +64,15 @@ function OutletInfo() {
     const countryValue = Form.useWatch('country', form);
     const restTypeValue = Form.useWatch('restaurant_type', form);
     const tariffValue = Form.useWatch('tariff', form);
+
+    const initValue = {
+        exhaust_number: 0,
+        ac_number: 0,
+        fridge_number: 0,
+        total_outlets: 1,
+        country: "SG",
+    }
+    
     
     const [mandCom, setManCom] = useState(false);
     const [operatingHourValue, setOperatingHourValue] = useState(outlet.operating_hours ?? 1);
@@ -153,14 +167,14 @@ function OutletInfo() {
 
     const onChangeAcController = (value) => {  
         const contNo = value.length;
-        if(contNo > acNoValue){
-            setAcExceeded(true);
-            setAcControllerSelected(contNo);
-            return;
-        } else {
-            setAcExceeded(false);
-            setAcControllerSelected(contNo);
-        }
+        // if(contNo > acNoValue){
+        //     setAcExceeded(true);
+        //     setAcControllerSelected(contNo);
+        //     return;
+        // } else {
+        //     setAcExceeded(false);
+        //     setAcControllerSelected(contNo);
+        // }
         if (isNaN(value)) {
             return;
         }
@@ -198,8 +212,43 @@ function OutletInfo() {
         setFridgeTypeSelected(typeNo);
     };
 
+    let additionalmandatory = 0;
     const checkMandatory = () => {
         if((streetValue || outlet.street_address) != null && (postValue || outlet.postal_code) != 0 && (countryValue || outlet.country) != null && (restTypeValue || outlet.restaurant_type) != null && (tariffValue || outlet.tariff) != null){
+            // if((fridgeNoValue || outlet.fridge_number) != 0 || (fridgeNoValue || outlet.fridge_number) != null){
+            //     if((fridgeTypeSelected || outlet.fridge_type) != null){
+            //         additionalmandatory =+ 1;
+            //         console.log("a");
+            //     } else {
+            //         additionalmandatory =- 1;
+            //     }
+            // } else {
+            //     additionalmandatory =+ 1;
+            // }
+            // if((acNoValue || outlet.ac_number) != 0 || (acNoValue || outlet.ac_number) != null){
+            //     if((acTypeSelected || outlet.ac_type) != null){
+            //         additionalmandatory =+ 1;
+            //         console.log("b");
+            //     } else {
+            //         additionalmandatory =- 1;
+            //     }
+            // } else {
+            //     additionalmandatory =+ 1;
+            // }
+            // if((acControllerSelected || outlet.ac_controller) != null){
+            //     if((acControllerSelected || outlet.ac_controller) != null){
+            //         additionalmandatory =+ 1;
+            //         console.log("c");
+            //     } else {
+            //         additionalmandatory =- 1;
+            //     }
+            // } else {
+            //     additionalmandatory =+ 1;
+            // }
+            // console.log(additionalmandatory);
+            // if(additionalmandatory == 3){
+            //     setManCom(true);
+            // }
             setManCom(true);
         } else {
             setManCom(false);
@@ -211,7 +260,7 @@ function OutletInfo() {
         <Form
             name="complex-form"
             onFinish={onFinish}
-            initialValues={outlet.isNaN ? null : outlet}
+            initialValues={Object.keys(outlet).length == 0 ? initValue : outlet}
             form={form}
         >
             
@@ -259,12 +308,15 @@ function OutletInfo() {
                         ]}
                         >
                         <Select
-                            placeholder="Singapore"
+                            showSearch
                             style={{
                                 width:"100%",
                             }}
-                            options={countryList}
-                        />
+                        >
+                           {countryList.map((e) => (
+                                <Option key={e.no} value={e.label}>{e.label}</Option>
+                           ))}
+                        </Select>
                     </Form.Item>
                 </Grid>
             </Grid>
@@ -356,7 +408,7 @@ function OutletInfo() {
                 </Grid>
                 {exhaustNoValue ? (
                     <Grid item className='text-left mt-0' sm={12} xs={12} md={4}>
-                        <label className='head_text_label'>Kitchen Exhaust Width Dimension:</label>
+                        <label className='head_text_label'>Kitchen Exhaust Capacity:</label>
                         <Form.Item name="exhaust_width" >
                         <Row>
                             <Col span={17}>
@@ -395,19 +447,19 @@ function OutletInfo() {
                     <Form.Item name="ac_number" className='mb-0' >
                         <InputNumber type='number' status={acExceeded ? 'error' : null} min={0} max={999} style={{ width: "100px" }} onChange={onChangeAcNo} />
                     </Form.Item>
-                    {acExceeded ? (<p className='text-red-500 pt-0'>You cannot select more types or controllers than total number</p>) : <></> } 
+                    {acExceeded ? (<p className='text-red-500 pt-0'>You cannot select more types than total number</p>) : <></> } 
                 </Grid>
                 {acNoValue > 0 ? (
                     <>
                     <Grid item className='text-left mt-0' sm={12} xs={12} md={4}>
-                        <label className='head_text_label'>Type of Air-con</label>
-                        <Form.Item name='ac_type' >
+                        <label className='head_text_label'>Type of Air-con*</label>
+                        <Form.Item name='ac_type' rules={[{required : true, message: "Type of Air-con is required."}]} >
                             <Select mode='multiple' tagRender={TagRenderer} options={acType} className='w-full' onChange={onChangeAcType}/>
                         </Form.Item>
                     </Grid>
                     <Grid item className='text-left mt-0' sm={12} xs={12} md={4}>
-                        <label className='head_text_label'>Controller Type</label>
-                        <Form.Item name='ac_controller'>
+                        <label className='head_text_label'>Controller Type*</label>
+                        <Form.Item name='ac_controller' rules={[{required : true, message: "Controller Type is required."}]}>
                             <Select mode='multiple' options={remoteAcType} tagRender={TagRenderer} className='w-full' onChange={onChangeAcController}/>
                         </Form.Item>
                     </Grid>
@@ -417,7 +469,7 @@ function OutletInfo() {
             </Grid>
             <Grid container spacing={2} marginTop={1}>
                 <Grid item className='text-left mt-0' sm={12} xs={12} md={4}>
-                    <label className='head_text_label'>Number of Friges</label>
+                    <label className='head_text_label'>Number of Fridges</label>
                     <br />
                     <Form.Item name="fridge_number" className='mb-0'>
                         <InputNumber type='number' status={fridgeExceeded ? 'error' : null} min={0} max={999} style={{ width: "100px" }} onChange={onChangeFridgeNo} />
@@ -426,8 +478,11 @@ function OutletInfo() {
                 </Grid>
                 {fridgeNoValue ? (
                     <Grid item className='text-left mt-0' sm={12} xs={12} md={4}>
-                        <label className='head_text_label'>Type of Friges</label>
-                        <Form.Item name='fridge_type'>
+                        <label className='head_text_label'>Type of Friges*</label>
+                        <Form.Item name='fridge_type' rules={[{
+                            required: true,
+                            message: "Type of Friges is required."
+                        }]}>
                             <Select mode='tags' options={frigdeType} tagRender={TagRenderer} className='w-full' onChange={onChangeFridgeType}/>
                         </Form.Item>
                     </Grid>
@@ -439,11 +494,11 @@ function OutletInfo() {
                 <Grid item className='text-left mt-0' sm={12} xs={12} md={12}>
                     <Row>
                         <Col span={4}>
-                            <label className='head_text_label'>Total outlets</label>
+                            <label className='head_text_label'>Total Outlets</label>
                         </Col>
                         <Col span={8}>
                             <Form.Item name='total_outlets'>
-                                <InputNumber min={0} max={999} style={{ width: "100px" }} />
+                                <InputNumber min={1} max={999} style={{ width: "100px" }} />
                             </Form.Item>
                         </Col>
                         <Col span={12}>

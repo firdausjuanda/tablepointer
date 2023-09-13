@@ -1,4 +1,4 @@
-import logo from '../assets/icons/TablePointer Logo-White (300 ppi) 1.png';
+import logo from '../assets/icons/Tablepointer Logo-White.svg';
 
 
 function Header() {

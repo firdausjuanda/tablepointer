@@ -13,7 +13,7 @@ const Loading = () => {
             spin
         />} />
         <br />
-        <h1 className='head_text_3 mt-20 mb-40' style={{ textAlign: 'center' }}>Calculating</h1>
+        <h1 className='head_text_large mt-20 mb-40' style={{ textAlign: 'center' }}>Calculating</h1>
         
     </div>
   )

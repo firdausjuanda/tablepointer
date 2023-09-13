@@ -135,10 +135,26 @@ code {
 }
 
 .head_text_3 {
-  @apply text-tp-dark-blue font-bold text-left leading-[1.15] text-[50px];
+  @apply text-tp-dark-blue font-bold text-left leading-[1.15] text-[14px];
 }
 
 .head_text_3_white {
+  @apply text-white font-bold text-left leading-[1.15] text-[14px];
+}
+
+.text_3 {
+  @apply text-tp-dark-blue text-left leading-[1.15] text-[14px];
+}
+
+.text_3_white {
+  @apply text-white text-left leading-[1.15] text-[14px];
+}
+
+.head_text_large {
+  @apply text-tp-dark-blue font-bold text-left leading-[1.15] text-[50px];
+}
+
+.head_text_large_white {
   @apply text-white font-bold text-left leading-[1.15] text-[50px];
 }
 

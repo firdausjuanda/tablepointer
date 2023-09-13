@@ -52,11 +52,11 @@ function Result() {
             <Row>
               <Col className='md:w-1/3 w-full' >
                 <h1 className='head_text'>$120000</h1>
-                <p className='orange_bold'>SGD Savings</p>
+                <p className='orange_bold'>Cost Savings</p>
               </Col>
               <Col className='md:w-1/3 w-full'>
-                <h1 className='head_text'>999999</h1>
-                <p className='orange_bold'>kWh Savings</p>
+                <h1 className='head_text'>999999<span className='text_3'>kWh</span></h1>
+                <p className='orange_bold'>Energy Savings</p>
               </Col>
             </Row>
           </Card>
@@ -65,11 +65,11 @@ function Result() {
             <Row>
               <Col className='md:w-1/3 w-full' >
                 <h1 className='head_text'>$3000000</h1>
-                <p className='orange_bold'>SGD Savings</p>
+                <p className='orange_bold'>Cost Savings</p>
               </Col>
               <Col className='md:w-1/3 w-full'>
-                <h1 className='head_text'>3000000</h1>
-                <p className='orange_bold'>kWh Savings</p>
+                <h1 className='head_text'>3000000<span className='text_3'>kWh</span></h1>
+                <p className='orange_bold'>Energy Savings</p>
               </Col>
             </Row>
           </Card>
@@ -78,37 +78,35 @@ function Result() {
             <Row>
               <Col className='md:w-1/3 w-full' >
                 <h1 className='head_text'>$3000000</h1>
-                <p className='orange_bold'>SGD Savings</p>
+                <p className='orange_bold'>Cost Savings</p>
               </Col>
               <Col className='md:w-1/3 w-full'>
-                <h1 className='head_text'>3000000</h1>
-                <p className='orange_bold'>kWh Savings</p>
-              </Col>
-            </Row>
-            <Row className='mt-5'>
-              <Col className='md:w-1/3 w-full' >
-                <img className='mx-auto' src={openingHoursLogo} width={100} height={100} alt='opening-hours'/>
-              </Col>
-              <Col className='md:w-1/3 w-full'>
-                <img className='mx-auto' src={airplaneLogo} width={100} height={100} alt='airplane'/>
-              </Col>
-              <Col className='md:w-1/3 w-full'>
-                <img className='mx-auto' src={forestLogo} width={100} height={100} alt='forest'/>
+                <h1 className='head_text'>3000000<span className='text_3'>kWh</span></h1>
+                <p className='orange_bold'>Energy Savings</p>
               </Col>
             </Row>
             <Row>
-              <Col className='md:w-1/3 w-full' >
-                <h1 className='head_text'>3000000</h1>
-                <p className='orange_bold'>Meal Served</p>
+              <Col className='md:w-1/3 w-full mt-10' >
+                <Col className='max-w-fit'>
+                  <img className='mx-auto' src={openingHoursLogo} width={100} height={100} alt='opening-hours'/>
+                  <h1 className='head_text'>3000000</h1>
+                </Col>
+                <p className='orange_bold'>Meals Served</p>
                 <p className='orange_small'>Equivalent to operating XXX more days.</p>
               </Col>
-              <Col className='md:w-1/3 w-full'>
-                <h1 className='head_text'>3000000</h1>
+              <Col className='md:w-1/3 w-full mt-10'>
+                <Col className='max-w-fit'>
+                  <img className='mx-auto' src={airplaneLogo} width={100} height={100} alt='airplane'/>
+                  <h1 className='head_text'>3000000</h1>
+                </Col>
                 <p className='orange_bold'>kg of CO2</p>
                 <p className='orange_small'>Equivalent to driving XXX cars for one year.</p>
               </Col>
-              <Col className='md:w-1/3 w-full'>
-                <h1 className='head_text'>3000000</h1>
+              <Col className='md:w-1/3 w-full mt-10'>
+                <Col className='max-w-fit'>
+                  <img className='mx-auto' src={forestLogo} width={100} height={100} alt='forest'/>
+                  <h1 className='head_text'>3000000</h1>
+                </Col>
                 <p className='orange_bold'>Trees Planted</p>
                 <p className='orange_small'>Equivalent to XXX soccer fields.</p>
               </Col>

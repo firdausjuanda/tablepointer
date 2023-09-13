@@ -92,7 +92,7 @@ QontoStepIcon.propTypes = {
   completed: PropTypes.bool,
 };
 
-const steps = ['Outlet Info', 'Contact Detail', 'Result'];
+const steps = ['Outlet Info', 'Contact Details', 'Results'];
 
 export default function TPStepper(props) {
   const { progress } = props;
