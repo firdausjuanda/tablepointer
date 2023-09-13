@@ -70,7 +70,7 @@ function OutletInfo() {
         ac_number: 0,
         fridge_number: 0,
         total_outlets: 1,
-        country: "SG",
+        country: "Singapore",
     }
     
     
