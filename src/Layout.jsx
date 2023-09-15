@@ -13,8 +13,8 @@ const Layout = ({ children }) => {
             background:`linear-gradient(rgb(19,103,198,0.76), rgb(19,103,198,0.76)), url(${backgroundImageUrl})`,
             // backgroundImage: `url(${backgroundImageUrl})`, 
             backgroundRepeat: 'no-repeat', 
-            backgroundSize: 'cover' ,
-          }} className="bg-gradient-to-r from-cyan-500 to-blue-500" >
+            backgroundSize: 'cover',
+          }} className="bg-gradient-to-r from-cyan-500 to-blue-500 w-full" >
           <div className='opacity-100'>
             <Grid container spacing={2} className='md:p-10 xs:p-0 xs:p-0 xs:m-0 xs:m-0'>
               <Grid item md={3}>

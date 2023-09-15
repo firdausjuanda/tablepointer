@@ -405,6 +405,7 @@ function OutletInfo() {
                     <Form.Item name="exhaust_number" >
                         <InputNumber type='number' min={0} max={999} style={{ width: "100px" }} onChange={onChangeExhaustNo} />
                     </Form.Item>
+                    <div style={{ marginTop: "30px"}}></div>
                 </Grid>
                 {exhaustNoValue ? (
                     <Grid item className='text-left mt-0' sm={12} xs={12} md={4}>
@@ -447,7 +448,7 @@ function OutletInfo() {
                     <Form.Item name="ac_number" className='mb-0' >
                         <InputNumber type='number' status={acExceeded ? 'error' : null} min={0} max={999} style={{ width: "100px" }} onChange={onChangeAcNo} />
                     </Form.Item>
-                    {acExceeded ? (<p className='text-red-500 pt-0'>You cannot select more types than total number</p>) : <></> } 
+                    {acExceeded ? (<p style={{ marginBottom: "8px"}}  className='text-red-500 pt-0'>You cannot select more types than total number</p>) : <div style={{ marginTop: "30px"}}></div> } 
                 </Grid>
                 {acNoValue > 0 ? (
                     <>
@@ -474,7 +475,7 @@ function OutletInfo() {
                     <Form.Item name="fridge_number" className='mb-0'>
                         <InputNumber type='number' status={fridgeExceeded ? 'error' : null} min={0} max={999} style={{ width: "100px" }} onChange={onChangeFridgeNo} />
                     </Form.Item>
-                    {fridgeExceeded ? (<p className='text-red-500 pt-0'>You cannot select more types than total number</p>) : <></> }
+                    {fridgeExceeded ? (<p style={{ marginBottom: "8px"}} className='text-red-500 pt-0'>You cannot select more types than total number</p>) : <div style={{ marginTop: "30px"}}></div> }
                 </Grid>
                 {fridgeNoValue ? (
                     <Grid item className='text-left mt-0' sm={12} xs={12} md={4}>
@@ -489,7 +490,7 @@ function OutletInfo() {
                 ) : <></>}
                 
             </Grid>
-            <h1 className='head_text_2 mt-16'>Other Details</h1>
+            <h1 className='head_text_2 mt-10'>Other Details</h1>
             <Grid container spacing={2} marginTop={1}>
                 <Grid item className='text-left mt-0' sm={12} xs={12} md={12}>
                     <Row>
